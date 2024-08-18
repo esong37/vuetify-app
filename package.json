@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@woodydark/vuetify-audio-player": "^1.0.2",
+    "axios": "^1.7.4",
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
+    "vue-router": "^3.6.5",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
