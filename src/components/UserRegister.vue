@@ -29,7 +29,9 @@
   </template>
   
   <script>
-  import axios from 'axios';
+  //import axios from 'axios';
+  import axios from '../axios';
+
   
   export default {
     data() {
@@ -50,8 +52,12 @@
           });
   
           if (response.data.status === 0) {
-
+            if (response.data.token) {
+              localStorage.setItem('token', response.data.token);
+            }
             this.$router.push('/login');
+
+            
           } else {
             this.error = response.data.msg;
           }

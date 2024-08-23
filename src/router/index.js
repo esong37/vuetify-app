@@ -12,7 +12,8 @@ import Album from '../components/pidAlbum.vue';
 
 Vue.use(Router);
 
-export default new Router({
+
+const router = new Router({
     mode: 'history',
     routes: [
         { path: '/', component: App },
@@ -24,3 +25,22 @@ export default new Router({
         { path: '/album/:pid', component: Album },
     ],
 });
+
+// Global Navigation Guard
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = localStorage.getItem('token'); // check jwt token
+  
+    if (to.path !== '/login' && to.path !== '/register' && !isAuthenticated) {
+      // if not login, redirect
+      if (to.path !== '/login') {
+        next('/login');
+      } else {
+        next();
+      }
+    } else {
+      next(); 
+    }
+  });
+  
+
+export default router;
