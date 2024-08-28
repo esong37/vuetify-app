@@ -8,6 +8,8 @@ import Explore from '../components/UserExplore.vue';
 import Library from '../components/UserLibrary.vue';
 import Playlist from '../components/pidPlayList.vue';
 import Album from '../components/pidAlbum.vue';
+import AllPlaylists from '../components/AllPlaylists.vue';
+import AllAlbum from '@/components/AllAlbum.vue';
 
 
 Vue.use(Router);
@@ -21,8 +23,11 @@ const router = new Router({
         { path: '/register', component: Register },
         { path: '/explore', component: Explore },
         { path: '/library', component: Library },
+        { path: '/playlist/', component: AllPlaylists },
         { path: '/playlist/:pid', component: Playlist },
+        { path: '/album/', component: AllAlbum },
         { path: '/album/:pid', component: Album },
+
     ],
 });
 

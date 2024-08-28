@@ -4,8 +4,8 @@
     <v-spacer></v-spacer>
     <v-btn text to="/">Home</v-btn>
     <v-btn text to="/library">Library</v-btn>
-    <v-btn text to="/playlist/1">Playlist</v-btn>
-    <v-btn text to="/album/1">Album</v-btn>
+    <v-btn text to="/playlist/">Playlist</v-btn>
+    <v-btn text to="/album/">Album</v-btn>
 
     <v-form @submit.prevent="handleSearch">
       <v-text-field v-model="searchQuery" prepend-inner-icon="mdi-magnify" label="Search" hide-details solo-inverted
@@ -45,8 +45,12 @@ export default {
     ...mapGetters(['isAuthenticated']),
   },
   methods: {
+
     handleSearch() {
-      if (this.searchQuery) {
+      const currentQuery = this.$route.query.q;
+
+      // negative only if the search keyword changes
+      if (this.searchQuery && this.searchQuery !== currentQuery) {
         this.$router.push({ path: '/explore', query: { q: this.searchQuery } });
       }
     },

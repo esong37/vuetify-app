@@ -3,21 +3,25 @@
         <!-- Header -->
         <AppHeader />
 
-        <router-view @play-track="playTrack" />
+        
 
-        <!-- based on router -->
-        <template v-if="
-            $route.path !== '/login'
-            && $route.path !== '/register'
-            && $route.path !== '/explore'
-            && $route.path !== '/library'
-            && !$route.path.startsWith('/playlist')
-        ">
+        <div class="content-container">
+            <router-view @play-track="playTrack" />
+            <!-- based on router -->
+            <template v-if="
+                $route.path !== '/login'
+                && $route.path !== '/register'
+                && $route.path !== '/explore'
+                && $route.path !== '/library'
+                && !$route.path.startsWith('/playlist')
+                && !$route.path.startsWith('/album')
+            ">
 
-            <MusicLibrary :tracks="tracks" @play-track="playTrack" />
+                <MusicLibrary :tracks="tracks" @play-track="playTrack" />
 
-        </template>
-        <AudioPlayer :currentTrack="currentTrack" />
+            </template>
+            <AudioPlayer :currentTrack="currentTrack" />
+        </div>
 
     </v-app>
 </template>
@@ -74,7 +78,8 @@ export default {
             try {
                 const response = await axios.get('http://localhost:3000/api/stream');
                 this.tracks = response.data.tracks.map(track => ({
-                    id: track._id,
+                    id: track.track_id,
+                    type: track.type,
                     title: track.title,
                     src: `http://localhost:3000/api/stream/${track.track_id}`,
                     albumArt: `https://picsum.photos/400?random=${Math.random()}`,
@@ -96,3 +101,11 @@ export default {
     },
 };
 </script>
+
+
+
+<style scoped>
+.content-container {
+  margin-top: 100px;
+}
+</style>
