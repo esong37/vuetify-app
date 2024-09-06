@@ -24,6 +24,10 @@
         <v-list-item v-if="!isAuthenticated" link to="/register">
           <v-list-item-title>Register</v-list-item-title>
         </v-list-item>
+        <v-list-item v-if="isAuthenticated" link to="/info">
+          <!-- 新增的 Info 按钮 -->
+          <v-list-item-title>Info</v-list-item-title>
+        </v-list-item>
         <v-list-item v-if="isAuthenticated" @click="logout">
           <v-list-item-title>Log out</v-list-item-title>
         </v-list-item>
@@ -45,11 +49,10 @@ export default {
     ...mapGetters(['isAuthenticated']),
   },
   methods: {
-
     handleSearch() {
       const currentQuery = this.$route.query.q;
 
-      // negative only if the search keyword changes
+      // Only navigate if the search keyword changes
       if (this.searchQuery && this.searchQuery !== currentQuery) {
         this.$router.push({ path: '/explore', query: { q: this.searchQuery } });
       }

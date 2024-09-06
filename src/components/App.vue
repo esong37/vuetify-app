@@ -13,6 +13,8 @@
                 && $route.path !== '/register'
                 && $route.path !== '/explore'
                 && $route.path !== '/library'
+                && $route.path !== '/create-playlist'
+                && $route.path !== '/info'
                 && !$route.path.startsWith('/playlist')
                 && !$route.path.startsWith('/album')
             ">

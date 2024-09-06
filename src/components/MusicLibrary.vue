@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import axios from '../axios'; 
+import axios from '../axios';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -34,15 +34,16 @@ export default {
     },
     async toggleFavorite(track) {
       if (!this.isAuthenticated) {
-        this.$router.push('/login'); 
+        this.$router.push('/login');
         return;
       }
 
       try {
         const favoriteData = {
-          type: track.type || 'track',
+          type: 'track',
           id: track.id,
           added_date: new Date().toISOString(),
+          title: track.title,
         };
 
         // to backend
